@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <ImageButton
+        android:id="@+id/face_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:padding="15dp"
+        android:background="@drawable/button2"
+        android:src="@drawable/face"
+        android:scaleType="fitCenter"
+        android:backgroundTint="#6bf12d"
+        android:tint="#ffffd630" />
+
+    <ImageButton
+        android:id="@+id/face_btn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/face_btn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button2"
+        android:backgroundTint="#dc31e2"
+        android:padding="15dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/face"
+        android:tint="#304fff" />
+
+</RelativeLayout>

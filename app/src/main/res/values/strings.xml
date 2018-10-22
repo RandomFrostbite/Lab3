@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Lab3</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="placeholder">Choose your ringtone</string>
+    <string name="Sounds">Sounds:</string>
+    <string name="Sound1">Ring #1</string>
+    <string name="Sound2">Ring #2</string>
+    <string name="Sound3">Ring #3</string>
+    <string name="Sound4">Ring #4</string>
+    <string name="set_sound">Set sound</string>
+
+    <string name="current_sound_str">Current ringtone: </string>
+    <string name="back_message">Selection canceled</string>
+
+
+</resources>
