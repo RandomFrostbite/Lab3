@@ -1116,6 +1116,7 @@ id icon
 id icon_group
 id ifRoom
 id image
+id include
 id info
 id invisible
 id italic
@@ -1187,10 +1188,10 @@ id snackbar_action
 id snackbar_text
 id snap
 id snapMargins
+id sound0
 id sound1
 id sound2
 id sound3
-id sound4
 id spacer
 id split_action_bar
 id spread
@@ -1317,7 +1318,6 @@ layout support_simple_spinner_dropdown_item
 menu menu_main
 mipmap ic_launcher
 mipmap ic_launcher_round
-raw intro
 raw mario
 raw ring01
 raw ring02

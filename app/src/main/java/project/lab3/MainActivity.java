@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     static public Uri[] sounds;
     public static final String SOUND_ID = "sound id";
     public static final int BUTTON_REQUEST = 1;
-    private int current_sound = 0;
+    private int current_soundF = 0, current_soundS = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 //Reset the player
                 buttonPlayer.reset();
                 try {
-                    buttonPlayer.setDataSource(getApplicationContext(),sounds[current_sound]);
+                    buttonPlayer.setDataSource(getApplicationContext(),sounds[current_soundF]);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -81,8 +82,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent soundPick = new Intent( getApplicationContext(), SecondActivity.class );
                 //Attach the current_sound value to the Intent. This value can be
                 //retrieved with the SOUND_ID key.
-                soundPick.putExtra( SOUND_ID, current_sound );
-                soundPick.putExtra("ButtonNum", 1 );
+                soundPick.putExtra( SOUND_ID, current_soundF );
+                soundPick.putExtra( "BtnNum", 1 );
+                soundPick.putExtra( "block", current_soundS );
                 //Start the SecondActivity indicating that it will give a result
                 //back for a BUTTON_REQUEST request code
                 startActivityForResult( soundPick, BUTTON_REQUEST );
@@ -102,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 //Reset the player
                 buttonPlayer.reset();
                 try {
-                    buttonPlayer.setDataSource(getApplicationContext(),sounds[current_sound]);
+                    buttonPlayer.setDataSource(getApplicationContext(),sounds[current_soundS]);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -118,8 +120,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent soundPick = new Intent( getApplicationContext(), SecondActivity.class );
                 //Attach the current_sound value to the Intent. This value can be
                 //retrieved with the SOUND_ID key.
-                soundPick.putExtra( SOUND_ID, current_sound );
-                soundPick.putExtra("ButtonNum", 2 );
+                soundPick.putExtra( SOUND_ID, current_soundS );
+                soundPick.putExtra( "BtnNum", 2 );
+                soundPick.putExtra( "block", current_soundF );
                 //Start the SecondActivity indicating that it will give a result
                 //back for a BUTTON_REQUEST request code
                 startActivityForResult( soundPick, BUTTON_REQUEST );
@@ -174,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         //Create and prepare MediaPlayer with R.raw.mario as the data stream
         //source
-        backgroundPlayer = MediaPlayer.create(this, R.raw.intro);
+        backgroundPlayer = MediaPlayer.create(this, R.raw.mario);
         //Define a procedure that will be executed when the MediaPlayer goes to
         //the prepared state
         backgroundPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -203,7 +206,10 @@ public class MainActivity extends AppCompatActivity {
             // Make sure the request was successful
             if( requestCode == BUTTON_REQUEST )
             {
-                current_sound = data.getIntExtra(SOUND_ID,0);
+                if ( data.getIntExtra("BtnNum", 1 ) == 1 )
+                    current_soundF = data.getIntExtra( SOUND_ID,0);
+                if ( data.getIntExtra("BtnNum", 2 ) == 2 )
+                    current_soundS = data.getIntExtra( SOUND_ID,0);
             }
         }
         else if( resultCode == RESULT_CANCELED ){

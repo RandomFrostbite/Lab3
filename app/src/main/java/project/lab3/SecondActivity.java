@@ -10,12 +10,14 @@ import android.widget.TextView;
 
 public class SecondActivity extends AppCompatActivity {
 
-    private int selected_sound = 0;
+    private int selected_sound = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
+        selected_sound = getIntent().getIntExtra( MainActivity.SOUND_ID, 0 );
 
         //Receive the intent
         Intent received_intent = getIntent();
@@ -26,17 +28,21 @@ public class SecondActivity extends AppCompatActivity {
         TextView txV = (TextView)findViewById(R.id.current_sound_text);
         txV.setText( getText(R.string.current_sound_str) + " " + ((Integer)(sound_id+1)).toString() );
 
-        String radiochecked = "sound" + ++sound_id;
-        RadioButton btnchkd = findViewById( getResources().getIdentifier( radiochecked, "id", getPackageName() ) );
-        btnchkd.setChecked(true);
-        if ( received_intent.getIntExtra( "ButtonNum", 1 ) == 2 )
-            btnchkd.setEnabled(false);
+        String radiochecked = "sound" + sound_id;
+        RadioButton chked = findViewById( getResources().getIdentifier( radiochecked, "id", getPackageName() ) );
+        chked.setChecked(true);
+
+        Integer blocked_id = received_intent.getIntExtra("block", 1 );
+        String blocked = "sound" + blocked_id;
+        RadioButton blockedbtn = findViewById( getResources().getIdentifier( blocked, "id", getPackageName() ) );
+        blockedbtn.setEnabled(false);
     }
 
     public void setSoundClick(View v){
         //Create an empty Intent and add the selected_sound variable to it
         Intent data = new Intent();
         data.putExtra( MainActivity.SOUND_ID, selected_sound );
+        data.putExtra( "BtnNum", getIntent().getIntExtra("BtnNum", 1 ) );
         //Set the result code for the MainActivity and attach the data Intent
         setResult( RESULT_OK, data );
         //Destroy this Activity and propagate the ActivityResult
@@ -51,10 +57,11 @@ public class SecondActivity extends AppCompatActivity {
             // Check which radio button was clicked
             RadioGroup group = (RadioGroup) findViewById(R.id.radioGroup);
             switch ( view.getId() ){
-                case R.id.sound1: selected_sound = 0;break;
-                case R.id.sound2: selected_sound = 1;break;
-                case R.id.sound3: selected_sound = 2;break;
-                case R.id.sound4: selected_sound = 3;break;
+                case R.id.sound0: selected_sound = 0;break;
+                case R.id.sound1: selected_sound = 1;break;
+                case R.id.sound2: selected_sound = 2;break;
+                case R.id.sound3: selected_sound = 3;break;
+
             }
         }
     }
